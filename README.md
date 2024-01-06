@@ -2,7 +2,7 @@
 
 Welcome to Raider_Vs_Soldier, an action-packed game where you, as the raider, must defend your base from incoming soldiers. Can you survive the onslaught and score as many points as possible?
 
-[Watch Gameplay Video](./Assets/raider_vs_soldier_gif.gif)
+https://github.com/Neeltyper001/Raider_Vs_Soldier/assets/80151802/c8e706f3-f3ee-419c-8446-732edbc5fc20
 
 ## Controls
 
