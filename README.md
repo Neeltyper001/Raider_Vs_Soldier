@@ -29,3 +29,8 @@ This project is licensed under the [MIT License](LICENSE).
 
 Enjoy playing Raider_Vs_Soldier! 👾
 
+## Future Scope
+While this game is currently in its early stage, future scope regarding this project can be focused upon following
+- Adding tank as a valuable ally
+- Sound Effects
+### AND SOMETHING MORE !!
