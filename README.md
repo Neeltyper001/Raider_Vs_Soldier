@@ -6,14 +6,16 @@ https://github.com/Neeltyper001/Raider_Vs_Soldier/assets/80151802/c8e706f3-f3ee-
 
 ## Controls
 
-- **'A'**: Move Left
-- **'S'**: Move Down
-- **'W'**: Move Up
-- **'D'**: Move Right
+- **`A`**: Move Left ⬅️
+- **`S`**: Move Down ⬇️
+- **`W`**: Move Up   ⬆️
+- **`D`**: Move Right ➡️
+- **`J`**: Shoot Enemies 🔫
+- **`Q`**: To Run 🏃
 
 ## Goal
 
-The goal of the game is to score as many points as possible while fending off endless waves of soldiers. Use the controls wisely to navigate through the battlefield and defend your base.
+The goal of the game is to score as many points as possible while defending off endless waves of soldiers. Use the controls wisely to navigate through the battlefield and defend your base.
 
 ## Gameplay Video
 
@@ -29,8 +31,8 @@ This project is licensed under the [MIT License](LICENSE).
 
 Enjoy playing Raider_Vs_Soldier! 👾
 
-## Future Scope
-While this game is currently in its early stage, future scope regarding this project can be focused upon following
-- Adding tank as a valuable ally
-- Sound Effects
-### AND SOMETHING MORE !!
+## Future Ideas
+While this game is currently in its early stage, future ideas regarding this project can be following
+- Adding an important ally that can fight alongside with you.
+- Consumable items such as health kit etc.
+### AND MANY MORE !!
