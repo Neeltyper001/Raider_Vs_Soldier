@@ -4,20 +4,20 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 import com.animations.MainAnimation;
+import com.audios.GunShotEffect;
 import com.constants.Actions;
 import com.constants.GameConstants;
 import com.entities.Player;
-import com.main.GamePanel;
-import com.utils.ChangeAnimation;
-import com.utils.ChangeDelta;
 
 public class KeyBoardInputs implements KeyListener,Actions,GameConstants{
 	
-	Player player;
+	private Player player;
 	MainAnimation mainAnimation;
+	
+	private GunShotEffect gunShotEffect;
 	public KeyBoardInputs(Player player,MainAnimation mainAnimation ) {
 		this.player = player;
-//		this.mainAnimation = mainAnimation;
+		this.gunShotEffect = new GunShotEffect();
 	}
 	
 	@Override
@@ -62,7 +62,7 @@ public class KeyBoardInputs implements KeyListener,Actions,GameConstants{
 			System.out.println("Q is pressed");
 			this.player.setPlayerCurrentStatus(RUNNING);
 			this.player.getChangePlayerAnimation().setPresentAction(RUNNING,LEFT_DIRECTION);
-//			this.mainAnimation.setAnimationTickLimit(RUNNING_ANIMATION);
+
 			this.player.getChangeDelta().changeXDelta(RUNNING_SPEED);
 			break;
 			
@@ -70,6 +70,7 @@ public class KeyBoardInputs implements KeyListener,Actions,GameConstants{
 			System.out.println("J is pressed");
 			this.player.setPlayerCurrentStatus(ATTACKING);
 			this.player.getChangePlayerAnimation().setPresentAction(ATTACKING,LEFT_DIRECTION);
+			this.gunShotEffect.playGunShot();
 			break;
 		}
 		
@@ -83,29 +84,26 @@ public class KeyBoardInputs implements KeyListener,Actions,GameConstants{
 		case KeyEvent.VK_W:
 				System.out.println("W is released");
 				this.player.getChangePlayerAnimation().setPresentAction(IDLE,RIGHT_DIRECTION);
-//				this.changeDelta.changeYDelta(-5);				
+				
 				break;
 		case KeyEvent.VK_S:
 				System.out.println("S is released");
 				this.player.getChangePlayerAnimation().setPresentAction(IDLE,RIGHT_DIRECTION);
-//				this.changeDelta.changeYDelta(5);
+
 				break;
 		case KeyEvent.VK_A:
 				System.out.println("A is released");
 				this.player.getChangePlayerAnimation().setPresentAction(IDLE,RIGHT_DIRECTION);
-//				this.changeDelta.changeXDelta(-5);
+
 				break;
 		case KeyEvent.VK_D:
 				System.out.println("D is released");
 				this.player.getChangePlayerAnimation().setPresentAction(IDLE,RIGHT_DIRECTION);
-//				this.changeDelta.changeXDelta(5);
 				break;
 				
 		case KeyEvent.VK_Q:
 			System.out.println("Q is released");
-//			this.mainAnimation.setAnimationTickLimit(NON_RUNNING_ANIMATION);
 			this.player.getChangePlayerAnimation().setPresentAction(IDLE,RIGHT_DIRECTION);
-//			this.changeDelta.changeXDelta(5);
 			break;
 			
 			
@@ -113,7 +111,7 @@ public class KeyBoardInputs implements KeyListener,Actions,GameConstants{
 			System.out.println("J is released");
 			this.player.setPlayerCurrentStatus(IDLE);
 			this.player.getChangePlayerAnimation().setPresentAction(IDLE,RIGHT_DIRECTION);
-//			this.changeDelta.changeXDelta(5);
+			this.gunShotEffect.stopGunShot();
 			break;
 		}
 		

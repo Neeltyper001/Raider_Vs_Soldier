@@ -12,6 +12,6 @@ public interface GameConstants {
 	int SCREEN_H = 800;
 	int yDELTA_UPPER_LIMIT = 225;
 	int yDELTA_LOWER_LIMIT = 480;
-	// yDeltaUpperLimit = 225;
-	// yDeltaLowerLimit = 480
+	int SPLASH_SCREEN_WIDTH = 800;
+	int SPLASH_SCREEN_HEIGHT = 500;
 }

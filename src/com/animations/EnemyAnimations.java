@@ -10,15 +10,19 @@ public class EnemyAnimations implements GameResourcesPath,Actions{
 	
 	private BufferedImage mainWalkingImage;
 	private BufferedImage mainAttackingImage;
+	private BufferedImage mainDeadImage;
 	private BufferedImage walking [];
 	private BufferedImage attacking [];
+	private BufferedImage dead [];
 
 	
 	public EnemyAnimations() {
 		this.mainWalkingImage = new Sprites(ENEMY_WALKING).getImage();
 		this.mainAttackingImage = new Sprites(ENEMY_ATTACKING).getImage();
+		this.mainDeadImage = new Sprites(ENEMY_DEAD).getImage();
 		this.initEnemyWalkingAnimation();
 		this.initEnemyAttackingAnimation();
+		this.initEnemyDeadAnimation();
 	}
 	
 		
@@ -42,7 +46,13 @@ public class EnemyAnimations implements GameResourcesPath,Actions{
 		this.attacking[3] = this.mainAttackingImage.getSubimage(16, 42, 66, 86);
 	}
 	
-		
+	public void initEnemyDeadAnimation() {
+		this.dead = new BufferedImage[4];
+		this.dead[0] =  this.mainDeadImage.getSubimage(427, 42, 45, 86);
+		this.dead[1] =  this.mainDeadImage.getSubimage(297, 42, 45, 86);
+		this.dead[2] =  this.mainDeadImage.getSubimage(181, 42, 45, 86);
+		this.dead[3] =  this.mainDeadImage.getSubimage(39, 42, 68, 86);		
+	}
 	
 
 	public BufferedImage[] getEnemyActionAnimation(int actionType) {
@@ -50,6 +60,7 @@ public class EnemyAnimations implements GameResourcesPath,Actions{
 		switch( actionType ) {
 		case WALKING : return this.walking;
 		case ATTACKING: return this.attacking;
+		case DEAD: return this.dead;
 		default: return this.walking;
 
 		}

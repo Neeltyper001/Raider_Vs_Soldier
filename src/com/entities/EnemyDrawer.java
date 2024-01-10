@@ -9,6 +9,11 @@ import javax.swing.SwingUtilities;
 import com.animations.MainAnimation;
 import com.main.GamePanel;
 
+/** ATTENTION: 
+EnemyDrawer class is currently not in use but can have some potential use in future. 
+So if anyone wants to work with it can do whatever they want but make sure **THAT DO NOT REMOVE THIS CLASS**.
+Also, currently, this class is not a part of the game build.
+*/
 public class EnemyDrawer  implements Runnable {
 	
 	private MainAnimation mainAnimation;

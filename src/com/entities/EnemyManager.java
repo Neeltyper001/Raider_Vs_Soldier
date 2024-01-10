@@ -3,14 +3,13 @@ package com.entities;
 import java.util.ArrayList;
 
 import com.animations.EnemyAnimations;
+import com.constants.TemporalConstants;
 
-public class EnemyManager  implements Runnable {
+public class EnemyManager  implements Runnable,TemporalConstants {
 	
 	private ArrayList<Enemy> enemyArray;
-	private Thread enemyDrawerThread;
-//	private int MAX_COUNT = 3;
-	private int PRESENT_COUNT = 1;
-	private int COUNT_DOWN = 10000;
+	private int PRESENT_COUNT = UNITY;
+	private int COUNT_DOWN = SIX_SECONDS;
 	private Player player;
 	private Base base;
 	
@@ -44,8 +43,7 @@ public class EnemyManager  implements Runnable {
 		
 		while(true) {
 			if(this != null) {
-					this.setEnemyArray();
-					System.out.println("Enemy Manager thread is running with count "+this.PRESENT_COUNT);									
+					this.setEnemyArray();														
 			}
 			
             try {
@@ -56,8 +54,8 @@ public class EnemyManager  implements Runnable {
                 e.printStackTrace();
             }
             
-            if(this.COUNT_DOWN > 4000)
-            	this.COUNT_DOWN-=1000;
+            if(this.COUNT_DOWN > TWO_SECONDS)
+            	this.COUNT_DOWN-=ONE_SECOND;
             
             if(this.player.checkDeadStatus()) {
             	break;

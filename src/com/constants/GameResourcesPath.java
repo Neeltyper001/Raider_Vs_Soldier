@@ -23,6 +23,22 @@ public interface GameResourcesPath {
 	 // Enemy Background
 	 String ENEMY_WALKING = "/Enemy/Walk_rev.png";
 	 String ENEMY_ATTACKING = "/Enemy/Shot_2_rev.png";
+	 String ENEMY_DEAD = "/Enemy/Dead_rev.png";
 	 //background Image
 	 String GAME_BACKGROUND = "/Background/game_background_1.png";
+	 
+	 // Sound Effects
+	 String GAME_START = "/audio/effects/game_start.wav";
+	 String GAME_START_2 = "/audio/effects/game_start_2.wav";
+	 String GAME_OVER = "/audio/effects/game_over_2.mp3";
+	 String GUN_SHOT = "/audio/effects/gun_shot.mp3";
+	 String GUN_SHOT_2 = "/audio/effects/gun_shot.wav";
+	 String GAME_OVER_2 = "/audio/effects/game_over_2.wav";
+	 
+	 // Game Music
+	 String GAME_MUSIC = "/audio/music/game_music.mp3";
+	 String GAME_MUSIC_2 = "/audio/music/game_music_2.wav";
+	 
+	 // Game Splash Screen
+	 String SPLASH_SCREEN = "/splashScreen/game_splash_screen.png";
 }

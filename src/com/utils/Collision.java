@@ -5,6 +5,12 @@ import com.entities.Enemy;
 import com.entities.EnemyManager;
 import com.entities.Player;
 
+/** ATTENTION: 
+Collision class is currently not in use but can have potential in future. 
+So if one wants to work with it can do whatever they want but make sure **THAT DO NOT REMOVE THIS CLASS**.
+Also, currently, this class is not a part of the game build.
+*/
+
 public class Collision implements Actions{
 //	private	ChangeDelta changeDelta;
 //	private	ChangeEnemyDelta changeEnemyDelta;

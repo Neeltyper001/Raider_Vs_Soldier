@@ -11,7 +11,7 @@ public class RaiderAnimations implements GameResourcesPath,Actions {
 	
 //	private GamePanel gamePanel;
 	//default images
-	private Sprites playerSprites;
+
 	private BufferedImage mainIdleImage;
 	private BufferedImage mainWalkingImage;
 	private BufferedImage mainRunningImage;
@@ -45,7 +45,7 @@ public class RaiderAnimations implements GameResourcesPath,Actions {
 	private BufferedImage jumpingLeft [];
 	private BufferedImage hurtingLeft [];
 	private BufferedImage deadLeft [];	
-//	private boolean initFlag = false;
+
 	
 	public RaiderAnimations() {
 		this.mainIdleImage = new Sprites(RAIDER_IDLE).getImage();
@@ -71,17 +71,12 @@ public class RaiderAnimations implements GameResourcesPath,Actions {
 		this.initRaiderAttackingAnimation();
 		this.initRaiderJumpAnimation();
 		this.initRaiderHurtingAnimation();
-//		this.initRaiderDeadAnimation();
-		
-		// Left animation initialization
 		this.initRaiderIdleLeftAnimation();
 		this.initRaiderWalkingLeftAnimation();
 		this.initRaiderRunningLeftAnimation();
 		this.initRaiderAttackingLeftAnimation();
 		this.initRaiderJumpLeftAnimation();
 		this.initRaiderHurtingLeftAnimation();
-//		this.initRaiderDeadLeftAnimation();
-//		this.initFlag = true;
 	}
 	
 	//Default animations	
@@ -235,8 +230,6 @@ public class RaiderAnimations implements GameResourcesPath,Actions {
 		case RUNNING: return actionDirection == RIGHT_DIRECTION ? this.running : this.runningLeft;
 		case ATTACKING: return actionDirection == RIGHT_DIRECTION ? this.attacking : this.attackingLeft;
 		case WALKING_VERTICAL: return actionDirection == RIGHT_DIRECTION ? this.walking : this.walkingLeft;
-//		case HURTING: return actionDirection == RIGHT_DIRECTION ? this.hurting : this.hurtingLeft;
-//		case DEAD: return actionDirection == RIGHT_DIRECTION ? this.dead : this.deadLeft;
 		default: return actionDirection == RIGHT_DIRECTION ? this.idle : this.idleLeft;
 
 		}

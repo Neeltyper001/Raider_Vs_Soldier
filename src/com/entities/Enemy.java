@@ -3,17 +3,16 @@ package com.entities;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 
-import javax.swing.Action;
-
 import com.animations.EnemyAnimations;
 import com.constants.Actions;
 import com.constants.AnimationConstants;
+import com.constants.Attributes;
 import com.utils.ChangeAnimation;
 import com.utils.ChangeEnemyDelta;
 
 import Graphics.EnemyVisuals;
 
-public class Enemy extends Entity implements Actions, AnimationConstants{
+public class Enemy extends Entity implements Actions, AnimationConstants, Attributes{
 
 	private ChangeEnemyDelta changeEnemyDelta;
 	private ChangeAnimation changeEnemyAnimation;
@@ -32,7 +31,7 @@ public class Enemy extends Entity implements Actions, AnimationConstants{
 		this.player = player;
 		this.base = base;
 		this.enemyAnimations = new EnemyAnimations();
-		this.setHealth(50);
+		this.setHealth(ENEMY_MAX_HEALTH);
 		this.enemyVisuals = new EnemyVisuals();
 	}
 
@@ -53,33 +52,30 @@ public class Enemy extends Entity implements Actions, AnimationConstants{
 	}
 
 	public void enemyCollisionChecker() {
-		if(this.player.getChangeDelta().getYDelta() >= this.getChangeEnemyDelta().getYDelta() - 5 && this.player.getChangeDelta().getYDelta() <= this.getChangeEnemyDelta().getYDelta() + 5 
+		if(this.player.getChangeDelta().getYDelta() >= this.getChangeEnemyDelta().getYDelta() - ENEMY_COLLISION_LIMIT && this.player.getChangeDelta().getYDelta() <= this.getChangeEnemyDelta().getYDelta() + ENEMY_COLLISION_LIMIT 
 				&& this.player.getChangeDelta().getXDelta() <= this.getChangeEnemyDelta().getXDelta()) {
 			this.getChangeEnemyAnimation().setEnemyPresentAction(ATTACKING);
-			this.getChangeEnemyDelta().setEnemySpeed(0);
-//			this.changeEnemyDelta.setEnemySpeed(0);
-//			this.player.getChangePlayerAnimation().setPresentAction(HURTING, this.player.getChangePlayerAnimation().getPresentDirection());
-			if(this.player.getPlayerCurrentStatus() == ATTACKING) {
-				this.setHealth(-5);
-				System.out.println("Enemy health "+this.getHealth());
+			this.getChangeEnemyDelta().setEnemySpeed(NILL);
+			if(this.player.getPlayerCurrentStatus() == ATTACKING && this.player.getChangePlayerAnimation().getPresentDirection() == RIGHT_DIRECTION) {
+				this.setHealth(DAMAGE_TO_ENEMY);				
 			}
-			this.player.setHealth(-1);
+			this.player.setHealth(DAMAGE_TO_PLAYER);
 			
 		}
 		
 		else {
 			this.getChangeEnemyAnimation().setEnemyPresentAction(WALKING);
 			this.getChangeEnemyDelta().setEnemySpeed(1);
-			if(this.player.getPlayerCurrentStatus() == ATTACKING) {
-				this.setHealth(-5);
-				System.out.println("Enemy health "+this.getHealth());
+			if(this.player.getPlayerCurrentStatus() == ATTACKING && this.player.getChangePlayerAnimation().getPresentDirection() == LEFT_DIRECTION && this.player.getChangeDelta().getXDelta() > this.getChangeEnemyDelta().getXDelta()
+					&& this.player.getChangeDelta().getYDelta() >= this.getChangeEnemyDelta().getYDelta() - ENEMY_COLLISION_LIMIT && this.player.getChangeDelta().getYDelta() <= this.getChangeEnemyDelta().getYDelta() + ENEMY_COLLISION_LIMIT) {
+				this.setHealth(DAMAGE_TO_ENEMY);				
 			}
 		}
 	}
 	
 	public boolean checkDeadStatus() {
-		if(this.health <= 0) {
-			this.player.setPoints(5);
+		if(this.health <= NILL) {
+			this.player.setPoints(POINTS_TO_PLAYER);
 			return true;
 		}
 		
@@ -87,9 +83,8 @@ public class Enemy extends Entity implements Actions, AnimationConstants{
 	}
 	
 	public boolean checkHasInvadedBase() {
-		if(this.getChangeEnemyDelta().getXDelta() <= 0) {
-			this.base.setHealth(-5);
-			System.out.println("Invaded base"+" base life remaining: "+this.base.getHealth());
+		if(this.getChangeEnemyDelta().getXDelta() <= NILL) {
+			this.base.setHealth(DAMAGE_TO_BASE);			
 			return true;
 		}
 		
@@ -109,16 +104,14 @@ public class Enemy extends Entity implements Actions, AnimationConstants{
 	
 	public BufferedImage getEnemyLatestAnimationImage() {
 		int actionType = this.getChangeEnemyAnimation().getEnemyPresentAction();
-//		int actionType = this.enemyManager.getEnemyArray().get(0).getChangeEnemyAnimation().getEnemyPresentAction();
 		this.enemyPresentAnimationType = enemyAnimations.getEnemyActionAnimation(actionType);
-		
-		
+				
 		this.enemyAnimationTick++;
 		if(this.enemyAnimationTick >= this.enemyAnimationTickLimit) {
-			this.enemyAnimationTick = 0;
+			this.enemyAnimationTick = ENEMY_ANIMATION_TICK;
 			this.enemyAnimationIndex++;
 			if(enemyAnimationIndex >= enemyPresentAnimationType.length ) {
-				this.enemyAnimationIndex = 0;
+				this.enemyAnimationIndex = ENEMY_ANIMATION_STARTING_INDEX;
 			}
 		}
 		
@@ -126,13 +119,12 @@ public class Enemy extends Entity implements Actions, AnimationConstants{
 	}
 	
 	public void drawEnemy(Graphics g) {
-		g.drawImage(this.getEnemyLatestAnimationImage(),this.getChangeEnemyDelta().getXDelta(), this.getChangeEnemyDelta().getYDelta(), 70,120 , null);
+		g.drawImage(this.getEnemyLatestAnimationImage(),this.getChangeEnemyDelta().getXDelta(), this.getChangeEnemyDelta().getYDelta(), ENEMY_WIDTH, ENEMY_HEIGHT , null);
 		g.setColor(this.enemyVisuals.getEmptyHealthBar());
-		g.fillRect(this.getChangeEnemyDelta().getXDelta() + 30, this.getChangeEnemyDelta().getYDelta() - 30, 50, 5);
+		g.fillRect(this.getChangeEnemyDelta().getXDelta() + ENEMY_HEALTH_BAR_COORDS, this.getChangeEnemyDelta().getYDelta() - ENEMY_HEALTH_BAR_COORDS, ENEMY_MAX_HEALTH, ENEMY_HEALTH_BAR_HEIGHT);
 		g.setColor(this.enemyVisuals.getCurrentHealthBar());
-		g.fillRect(this.getChangeEnemyDelta().getXDelta() + 30, this.getChangeEnemyDelta().getYDelta() - 30, this.getHealth(), 5);
+		g.fillRect(this.getChangeEnemyDelta().getXDelta() + ENEMY_HEALTH_BAR_COORDS, this.getChangeEnemyDelta().getYDelta() - ENEMY_HEALTH_BAR_COORDS, this.getHealth(), ENEMY_HEALTH_BAR_HEIGHT);
 	}
 	
 
 }
-//&& this.player.getChangeDelta().getXDelta() <= this.getChangeEnemyDelta().getXDelta()

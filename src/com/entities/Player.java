@@ -8,8 +8,9 @@ import com.utils.ChangeDelta;
 import com.animations.RaiderAnimations;
 import com.constants.Actions;
 import com.constants.AnimationConstants;
+import com.constants.Attributes;
 
-public class Player extends Entity implements AnimationConstants,Actions{
+public class Player extends Entity implements AnimationConstants,Actions, Attributes{
 	
 	private ChangeDelta changeDelta;
 	private ChangeAnimation changePlayerAnimation;
@@ -23,12 +24,12 @@ public class Player extends Entity implements AnimationConstants,Actions{
 	
 	
 	public Player() {
-		this.health = 500;
+		this.health = PLAYER_MAX_HEALTH;
 		this.changeDelta = new ChangeDelta();
 		this.changePlayerAnimation = new ChangeAnimation();
 		this.raiderAnimations = new RaiderAnimations();
 		this.setPlayerCurrentStatus(IDLE);
-		this.points = 0;
+		this.points = STARTING_POINTS_TO_PLAYER;
 	}
 
 	public ChangeDelta getChangeDelta() {
@@ -64,18 +65,16 @@ public class Player extends Entity implements AnimationConstants,Actions{
 	}
 	
 	@Override
-	public void setHealth(int health) {
-		System.out.println("delivered health: "+health);
+	public void setHealth(int health) {		
 		this.health += health;
 	}
 	@Override
-	public int getHealth() {
-		System.out.println("Player health: "+this.health);
+	public int getHealth() {		
 		return this.health;
 	}
 	
 	public boolean checkDeadStatus() {
-		if(this.health <= 0) {
+		if(this.health <= NILL) {
 			return true;
 		}
 		
@@ -85,19 +84,14 @@ public class Player extends Entity implements AnimationConstants,Actions{
 	public BufferedImage getPlayerLatestAnimationImage() {
 		int actionType = this.getChangePlayerAnimation().getPresentAction();
 		int actionDirection = this.getChangePlayerAnimation().getPresentDirection();
-		this.presentAnimationType = raiderAnimations.getRaiderActionAnimation(actionType,actionDirection);
-		System.out.println(this.presentAnimationType.toString());
-		if(actionType == 5) {
-			System.out.println("LENGTH"+this.presentAnimationType.length);
-		}
-		
+		this.presentAnimationType = raiderAnimations.getRaiderActionAnimation(actionType,actionDirection);		
 		
 		this.animationTick++;
 		if(this.animationTick >= this.animationTickLimit) {
-			animationTick = 0;
+			animationTick = ANIMATION_TICK;
 			animationIndex++;
 			if(animationIndex >= presentAnimationType.length ) {
-				animationIndex = 0;
+				animationIndex = ANIMATION_STARTING_INDEX;
 			}
 		}
 
@@ -105,6 +99,6 @@ public class Player extends Entity implements AnimationConstants,Actions{
 	}
 	
 	public void drawPlayer(Graphics g) {
-		g.drawImage(this.getPlayerLatestAnimationImage(),this.getChangeDelta().getXDelta(),this.getChangeDelta().getYDelta(), 70, 120, null);
+		g.drawImage(this.getPlayerLatestAnimationImage(),this.getChangeDelta().getXDelta(),this.getChangeDelta().getYDelta(), PLAYER_WIDTH, PLAYER_HEIGHT, null);
 	}
 }
